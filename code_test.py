@@ -47,15 +47,14 @@ def get_string_of_clock() :
     return time_string
 
 
-# test function: t=get_string_of_clock()
-#print(t)
+#input: 1 ky tu
+#output: font mong muon
 def covert_1_character_to_1_font (character,font):
         if character.isdigit():
             return font[int(character)]
         else:
             return symbol
-# test fucntion: a=covert_1_character_to_1_font ("2",font)
-#print(a)
+#
 
 #int: time_string, font
 #output: array_font
@@ -65,12 +64,10 @@ def convert_time_string_to_array_font (time_string,font):
         convert=covert_1_character_to_1_font (time_string[i],font)
         array.append(convert)
     return array
-#tesst code: a=[]
-#a=convert_time_string_to_array_font ("12:2",font)
-#print(a)
 
-# input: array 1 chieu ky tu rieng le
-#output: array 1 chieu cac ky tu da duoc hop nhat
+
+# input: array 1 chieu phan tu rieng le
+#output: array 1 chieu cac phan tu da duoc hop nhat
 def merged_array (array) :
     merged=["","",""]
     for i in range(len(array[0])) :
@@ -78,6 +75,7 @@ def merged_array (array) :
             b=array[j]
             merged[i-1]+=b[i-1]
     return merged
+
 
 def display_merged (merged) :
     for i in range(len(merged)) :
@@ -88,9 +86,10 @@ while True :
     time_now= datetime.datetime.now()
     if time_now.second != pre_sec:
         os.system("clear")
+        print(time_now)
         time_string=get_string_of_clock()
-        array = convert_time_string_to_array_font (time_string,font)
-        merged = merged_array (array)
+        converted = convert_time_string_to_array_font (time_string,font)
+        merged = merged_array (converted)
         display_merged (merged)
         pre_sec=time_now.second
     time.sleep(0.001)
