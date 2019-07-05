@@ -46,12 +46,8 @@ var font =[][]string {
 //input: clock of system
 //output:string clock
 func get_time_clock_of_os()string{
-	var time_now = time.Now()
-	time_now1 := time_now.String()
-	fmt.Println(time_now1)
-	var time_string string
-	time_string = time_now1[11:19]
-	return time_string
+	var time_now = time.Now().String()
+	return time_now[11:19]
 }
 
 //input: 1 character and font
@@ -107,15 +103,19 @@ func clear_terminal(){
 	clear.Stdout = os.Stdout
 	clear.Run()
 }
+var pre_sec=0
 func main(){
-	for 1>0{
-		clear_terminal()
-		var time_string string
-		time_string=get_time_clock_of_os()
-		fmt.Println(time_string)
-		convert_font := convert_time_strings_to_fonts(time_string,font)
-		merge:=merge_array(convert_font)
-		display_merge_font(merge)
-		time.Sleep(1*time.Second)
+	for true{
+		time_string :=get_time_clock_of_os()
+		time_second:=int(time_string[6]-48)*10+int(time_string[7]-48)
+		if pre_sec != time_second{
+			clear_terminal()
+			fmt.Println(time_string)
+			convert_font := convert_time_strings_to_fonts(time_string,font)
+			merge:=merge_array(convert_font)
+			display_merge_font(merge)
+			pre_sec = time_second
+		}
+		time.Sleep(1*time.Millisecond)
 	}
 }
